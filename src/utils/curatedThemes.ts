@@ -7,6 +7,16 @@ export interface CuratedTheme {
   url: string;
 }
 
+/**
+ * Curated collection of VS Code themes for the theme editor.
+ *
+ * Theme URLs use jsDelivr CDN for reliable access:
+ * - npm packages: cdn.jsdelivr.net/npm/package@version/path
+ * - GitHub repos: cdn.jsdelivr.net/gh/owner/repo@branch/path
+ *
+ * jsDelivr provides faster, more reliable access than raw.githubusercontent.com
+ * and handles CORS properly for browser-based theme imports.
+ */
 export const CURATED_THEMES: CuratedTheme[] = [
   {
     id: 'catppuccin-mocha',
@@ -14,7 +24,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'Catppuccin',
     type: 'dark',
     description: 'Soothing pastel theme for the high-spirited',
-    url: 'https://raw.githubusercontent.com/catppuccin/vscode/main/themes/catppuccin-mocha.json',
+    url: 'https://cdn.jsdelivr.net/npm/@catppuccin/vscode@latest/themes/mocha.json',
   },
   {
     id: 'catppuccin-latte',
@@ -22,7 +32,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'Catppuccin',
     type: 'light',
     description: 'Soothing pastel theme — light variant',
-    url: 'https://raw.githubusercontent.com/catppuccin/vscode/main/themes/catppuccin-latte.json',
+    url: 'https://cdn.jsdelivr.net/npm/@catppuccin/vscode@latest/themes/latte.json',
   },
   {
     id: 'catppuccin-macchiato',
@@ -30,7 +40,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'Catppuccin',
     type: 'dark',
     description: 'Soothing pastel theme — macchiato variant',
-    url: 'https://raw.githubusercontent.com/catppuccin/vscode/main/themes/catppuccin-macchiato.json',
+    url: 'https://cdn.jsdelivr.net/npm/@catppuccin/vscode@latest/themes/macchiato.json',
   },
   {
     id: 'catppuccin-frappe',
@@ -38,7 +48,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'Catppuccin',
     type: 'dark',
     description: 'Soothing pastel theme — frappé variant',
-    url: 'https://raw.githubusercontent.com/catppuccin/vscode/main/themes/catppuccin-frappe.json',
+    url: 'https://cdn.jsdelivr.net/npm/@catppuccin/vscode@latest/themes/frappe.json',
   },
   {
     id: 'dracula',
@@ -46,7 +56,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'Dracula Theme',
     type: 'dark',
     description: 'Dark theme with vibrant colors',
-    url: 'https://raw.githubusercontent.com/dracula/visual-studio-code/master/theme/dracula.json',
+    url: 'https://cdn.jsdelivr.net/npm/dracula-theme@4.0.0/template/vscode/dracula.json',
   },
   {
     id: 'dracula-soft',
@@ -54,7 +64,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'Dracula Theme',
     type: 'dark',
     description: 'Soft variant of the classic Dracula theme',
-    url: 'https://raw.githubusercontent.com/dracula/visual-studio-code/master/theme/dracula-soft.json',
+    url: 'https://cdn.jsdelivr.net/npm/dracula-theme@4.0.0/template/vscode/dracula-soft.json',
   },
   {
     id: 'one-dark-pro',
@@ -62,7 +72,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'binaryify',
     type: 'dark',
     description: "Atom's iconic One Dark theme for VS Code",
-    url: 'https://raw.githubusercontent.com/Binaryify/OneDark-Pro/master/themes/OneDark-Pro.json',
+    url: 'https://cdn.jsdelivr.net/gh/Binaryify/OneDark-Pro@master/themes/OneDark-Pro.json',
   },
   {
     id: 'one-dark-pro-mix',
@@ -70,7 +80,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'binaryify',
     type: 'dark',
     description: 'One Dark Pro with mixed color palette',
-    url: 'https://raw.githubusercontent.com/Binaryify/OneDark-Pro/master/themes/OneDark-Pro-Mix.json',
+    url: 'https://cdn.jsdelivr.net/gh/Binaryify/OneDark-Pro@master/themes/OneDark-Pro-Mix.json',
   },
   {
     id: 'github-dark',
@@ -78,7 +88,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'GitHub',
     type: 'dark',
     description: "GitHub's official dark theme",
-    url: 'https://raw.githubusercontent.com/primer/github-vscode-theme/main/themes/github-dark.json',
+    url: 'https://cdn.jsdelivr.net/npm/github-vscode-theme@latest/themes/dark.json',
   },
   {
     id: 'github-light',
@@ -86,7 +96,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'GitHub',
     type: 'light',
     description: "GitHub's official light theme",
-    url: 'https://raw.githubusercontent.com/primer/github-vscode-theme/main/themes/github-light.json',
+    url: 'https://cdn.jsdelivr.net/npm/github-vscode-theme@latest/themes/light.json',
   },
   {
     id: 'github-dark-dimmed',
@@ -94,7 +104,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'GitHub',
     type: 'dark',
     description: "GitHub's dimmed dark theme",
-    url: 'https://raw.githubusercontent.com/primer/github-vscode-theme/main/themes/github-dark-dimmed.json',
+    url: 'https://cdn.jsdelivr.net/npm/github-vscode-theme@latest/themes/dark-dimmed.json',
   },
   {
     id: 'tokyo-night',
@@ -102,7 +112,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'enkia',
     type: 'dark',
     description: 'Clean dark theme honoring the lights of downtown Tokyo',
-    url: 'https://raw.githubusercontent.com/enkia/tokyo-night-vscode-theme/master/themes/tokyo-night-color-theme.json',
+    url: 'https://cdn.jsdelivr.net/gh/enkia/tokyo-night-vscode-theme@master/themes/tokyo-night-color-theme.json',
   },
   {
     id: 'tokyo-night-storm',
@@ -110,7 +120,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'enkia',
     type: 'dark',
     description: 'Tokyo Night with a stormier palette',
-    url: 'https://raw.githubusercontent.com/enkia/tokyo-night-vscode-theme/master/themes/tokyo-night-storm-color-theme.json',
+    url: 'https://cdn.jsdelivr.net/gh/enkia/tokyo-night-vscode-theme@master/themes/tokyo-night-storm-color-theme.json',
   },
   {
     id: 'night-owl',
@@ -118,7 +128,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'Sarah Drasner',
     type: 'dark',
     description: 'Fine-tuned for those of us who like to code late',
-    url: 'https://raw.githubusercontent.com/sdras/night-owl-vscode-theme/main/themes/Night%20Owl-color-theme.json',
+    url: 'https://cdn.jsdelivr.net/gh/sdras/night-owl-vscode-theme@main/themes/Night%20Owl-color-theme.json',
   },
   {
     id: 'night-owl-no-italics',
@@ -126,7 +136,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'Sarah Drasner',
     type: 'dark',
     description: 'Night Owl without italic styles',
-    url: 'https://raw.githubusercontent.com/sdras/night-owl-vscode-theme/main/themes/Night%20Owl-color-theme-no-italic.json',
+    url: 'https://cdn.jsdelivr.net/gh/sdras/night-owl-vscode-theme@main/themes/Night%20Owl-color-theme-no-italic.json',
   },
   {
     id: 'ayu-dark',
@@ -134,7 +144,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'teabyii',
     type: 'dark',
     description: 'Simple theme with bright colors',
-    url: 'https://raw.githubusercontent.com/ayu-theme/vscode-ayu/master/ayu-dark.json',
+    url: 'https://cdn.jsdelivr.net/gh/ayu-theme/vscode-ayu@master/ayu-dark.json',
   },
   {
     id: 'ayu-mirage',
@@ -142,7 +152,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'teabyii',
     type: 'dark',
     description: 'Ayu theme with a softer background',
-    url: 'https://raw.githubusercontent.com/ayu-theme/vscode-ayu/master/ayu-mirage.json',
+    url: 'https://cdn.jsdelivr.net/gh/ayu-theme/vscode-ayu@master/ayu-mirage.json',
   },
   {
     id: 'ayu-light',
@@ -150,7 +160,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'teabyii',
     type: 'light',
     description: 'Ayu light variant',
-    url: 'https://raw.githubusercontent.com/ayu-theme/vscode-ayu/master/ayu-light.json',
+    url: 'https://cdn.jsdelivr.net/gh/ayu-theme/vscode-ayu@master/ayu-light.json',
   },
   {
     id: 'nord',
@@ -158,7 +168,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'arcticicestudio',
     type: 'dark',
     description: 'Arctic, north-bluish color palette',
-    url: 'https://raw.githubusercontent.com/nordtheme/visual-studio-code/develop/themes/nord-color-theme.json',
+    url: 'https://cdn.jsdelivr.net/gh/nordtheme/visual-studio-code@develop/themes/nord-color-theme.json',
   },
   {
     id: 'monokai-pro',
@@ -166,7 +176,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'Monokai',
     type: 'dark',
     description: 'Professional theme for professional developers',
-    url: 'https://raw.githubusercontent.com/Monokai/monokai-pro-vscode/master/themes/Monokai%20Pro.json',
+    url: 'https://cdn.jsdelivr.net/gh/Monokai/monokai-pro-vscode@master/themes/Monokai%20Pro.json',
   },
   {
     id: 'solarized-dark',
@@ -174,7 +184,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'Ryan Olson',
     type: 'dark',
     description: 'Classic Solarized dark variant',
-    url: 'https://raw.githubusercontent.com/ryanolsonx/vscode-solarized-theme/master/themes/solarized-dark.json',
+    url: 'https://cdn.jsdelivr.net/gh/ryanolsonx/vscode-solarized-theme@master/themes/solarized-dark.json',
   },
   {
     id: 'gruvbox-dark',
@@ -182,7 +192,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'jdinhify',
     type: 'dark',
     description: "Retro groove color scheme — dark variant",
-    url: 'https://raw.githubusercontent.com/jdinhify/vscode-theme-gruvbox/main/themes/gruvbox-dark-medium.json',
+    url: 'https://cdn.jsdelivr.net/gh/jdinhify/vscode-theme-gruvbox@main/themes/gruvbox-dark-medium.json',
   },
   {
     id: 'material-dark',
@@ -190,7 +200,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'Equinusocio',
     type: 'dark',
     description: "The most epic theme for VS Code",
-    url: 'https://raw.githubusercontent.com/material-theme/vsc-material-theme/master/themes/Material-Theme-Default.json',
+    url: 'https://cdn.jsdelivr.net/gh/material-theme/vsc-material-theme@master/themes/Material-Theme-Default.json',
   },
   {
     id: 'palenight',
@@ -198,7 +208,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'Equinusocio',
     type: 'dark',
     description: 'Material Palenight variant',
-    url: 'https://raw.githubusercontent.com/material-theme/vsc-material-theme/master/themes/Material-Theme-Palenight.json',
+    url: 'https://cdn.jsdelivr.net/gh/material-theme/vsc-material-theme@master/themes/Material-Theme-Palenight.json',
   },
   {
     id: 'synthwave-84',
@@ -206,7 +216,7 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'Robb Owen',
     type: 'dark',
     description: "Inspired by 80s synthwave",
-    url: 'https://raw.githubusercontent.com/robb0wen/synthwave-vscode/master/themes/synthwave-color-theme.json',
+    url: 'https://cdn.jsdelivr.net/gh/robb0wen/synthwave-vscode@master/themes/synthwave-color-theme.json',
   },
   {
     id: 'panda',
@@ -214,6 +224,6 @@ export const CURATED_THEMES: CuratedTheme[] = [
     author: 'tinkertrain',
     type: 'dark',
     description: 'A superminimal dark Syntax Theme',
-    url: 'https://raw.githubusercontent.com/tinkertrain/panda-syntax-vscode/master/themes/panda-syntax-theme.json',
+    url: 'https://cdn.jsdelivr.net/gh/tinkertrain/panda-syntax-vscode@master/themes/panda-syntax-theme.json',
   },
 ];
