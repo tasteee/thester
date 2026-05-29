@@ -1,0 +1,61 @@
+/* ─── App shell ─────────────────────────────────────────────────────────── */
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-base);
+}
+
+/* ─── Split container ───────────────────────────────────────────────────── */
+.split-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.split-pane {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+  position: relative;
+}
+
+/* ─── Divider ────────────────────────────────────────────────────────────── */
+.split-divider {
+  width: 4px;
+  flex-shrink: 0;
+  background: var(--border);
+  cursor: col-resize;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 150ms;
+  z-index: 5;
+}
+
+.split-divider:hover,
+.split-divider:focus-visible {
+  background: var(--accent-glow);
+  outline: none;
+}
+
+.split-divider:hover .split-handle,
+.split-divider:focus-visible .split-handle {
+  opacity: 1;
+}
+
+.split-handle {
+  position: absolute;
+  width: 4px;
+  height: 48px;
+  border-radius: 2px;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 150ms;
+  box-shadow: 0 0 8px var(--accent-glow);
+}

@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&display=swap');
+
+/* ─── Design tokens ─────────────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg-base:          #08080f;
+  --bg-toolbar:       #0d0d1a;
+  --bg-tab-bar:       #0d0d1a;
+  --bg-tab-active:    #131320;
+  --bg-tab-inactive:  #0d0d1a;
+  --bg-tab-hover:     #111120;
+  --bg-editor:        #131320;
+  --bg-surface:       #16162a;
+  --bg-elevated:      #1c1c32;
+  --bg-modal:         #111120;
+  --bg-status-bar:    #0a0a14;
+
+  /* Borders */
+  --border:           rgba(255, 255, 255, 0.07);
+  --border-strong:    rgba(255, 255, 255, 0.13);
+
+  /* Accent — violet / indigo */
+  --accent:           #7c5cbf;
+  --accent-bright:    #a78bfa;
+  --accent-glow:      rgba(124, 92, 191, 0.28);
+
+  /* Text */
+  --text:             #e2e2f0;
+  --text-dim:         #9898b8;
+  --text-muted:       #5a5a7a;
+
+  /* Misc */
+  --toolbar-height:   48px;
+  --radius:           10px;
+}
+
+/* ─── Reset & base ──────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+html {
+  color-scheme: dark;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg-base);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Scrollbars ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar           { width: 6px; height: 6px; }
+::-webkit-scrollbar-track     { background: transparent; }
+::-webkit-scrollbar-thumb     { background: rgba(255,255,255,0.1); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
+
+/* ─── Focus ring ─────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
