@@ -8,6 +8,12 @@ export interface ThemeFile {
   isDirty: boolean;
 }
 
+interface PersistedThemeStore {
+  files: ThemeFile[];
+  activeFileId: string | null;
+  previewLanguage: string;
+}
+
 export const DEFAULT_THEME_CONTENT = JSON.stringify(
   {
     $schema: 'vscode://schemas/color-theme',
@@ -86,30 +92,88 @@ interface ThemeStore {
   removeFile: (id: string) => void;
   setActiveFile: (id: string) => void;
   updateFileContent: (id: string, content: string) => void;
+  saveFile: (id: string) => void;
+  saveActiveFile: () => void;
   renameFile: (id: string, name: string) => void;
   setPreviewLanguage: (lang: string) => void;
 }
 
-const initialFileId = nanoid();
+const STORAGE_KEY = 'thester.themeStore.v1';
+
+function safeParsePersisted(raw: string | null): PersistedThemeStore | null {
+  if (!raw) return null;
+  try {
+    const data = JSON.parse(raw) as Partial<PersistedThemeStore>;
+    if (!Array.isArray(data.files) || typeof data.previewLanguage !== 'string') return null;
+    const files: ThemeFile[] = data.files
+      .filter((f): f is ThemeFile => Boolean(f && typeof f === 'object'))
+      .map((f) => ({
+        id: typeof f.id === 'string' && f.id ? f.id : nanoid(),
+        name: typeof f.name === 'string' && f.name ? f.name : 'Untitled.json',
+        content: typeof f.content === 'string' ? f.content : DEFAULT_THEME_CONTENT,
+        isDirty: Boolean(f.isDirty),
+      }));
+
+    if (files.length === 0) return null;
+
+    const activeFileId =
+      typeof data.activeFileId === 'string' && files.some((f) => f.id === data.activeFileId)
+        ? data.activeFileId
+        : files[0]?.id ?? null;
+
+    return { files, activeFileId, previewLanguage: data.previewLanguage };
+  } catch {
+    return null;
+  }
+}
+
+function loadPersistedStore(): PersistedThemeStore | null {
+  if (typeof window === 'undefined') return null;
+  return safeParsePersisted(window.localStorage.getItem(STORAGE_KEY));
+}
+
+function persistStoreState(state: PersistedThemeStore) {
+  if (typeof window === 'undefined') return;
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch {
+    // Ignore persistence failures (e.g. storage quota / privacy mode)
+  }
+}
+
+const persisted = loadPersistedStore();
+const fallbackInitialFileId = nanoid();
+const initialState: PersistedThemeStore =
+  persisted ??
+  ({
+    files: [
+      {
+        id: fallbackInitialFileId,
+        name: 'My Custom Theme.json',
+        content: DEFAULT_THEME_CONTENT,
+        isDirty: false,
+      },
+    ],
+    activeFileId: fallbackInitialFileId,
+    previewLanguage: 'typescript',
+  } satisfies PersistedThemeStore);
 
 export const useThemeStore = create<ThemeStore>((set, get) => ({
-  files: [
-    {
-      id: initialFileId,
-      name: 'My Custom Theme.json',
-      content: DEFAULT_THEME_CONTENT,
-      isDirty: false,
-    },
-  ],
-  activeFileId: initialFileId,
-  previewLanguage: 'typescript',
+  files: initialState.files,
+  activeFileId: initialState.activeFileId,
+  previewLanguage: initialState.previewLanguage,
 
   addFile: (file) => {
     const id = nanoid();
-    set((state) => ({
-      files: [...state.files, { ...file, id, isDirty: false }],
-      activeFileId: id,
-    }));
+    set((state) => {
+      const next: PersistedThemeStore = {
+        files: [...state.files, { ...file, id, isDirty: false }],
+        activeFileId: id,
+        previewLanguage: state.previewLanguage,
+      };
+      persistStoreState(next);
+      return next;
+    });
     return id;
   },
 
@@ -128,20 +192,66 @@ export const useThemeStore = create<ThemeStore>((set, get) => ({
       }
     }
 
-    set({ files: remaining, activeFileId: newActive });
+    set((state) => {
+      const next: PersistedThemeStore = {
+        files: remaining,
+        activeFileId: newActive,
+        previewLanguage: state.previewLanguage,
+      };
+      persistStoreState(next);
+      return next;
+    });
   },
 
-  setActiveFile: (id) => set({ activeFileId: id }),
+  setActiveFile: (id) =>
+    set((state) => {
+      const next: PersistedThemeStore = { ...state, activeFileId: id };
+      persistStoreState(next);
+      return next;
+    }),
 
   updateFileContent: (id, content) =>
-    set((state) => ({
-      files: state.files.map((f) => (f.id === id ? { ...f, content, isDirty: true } : f)),
-    })),
+    set((state) => {
+      const next: PersistedThemeStore = {
+        files: state.files.map((f) => (f.id === id ? { ...f, content, isDirty: true } : f)),
+        activeFileId: state.activeFileId,
+        previewLanguage: state.previewLanguage,
+      };
+      persistStoreState(next);
+      return next;
+    }),
+
+  saveFile: (id) =>
+    set((state) => {
+      const next: PersistedThemeStore = {
+        files: state.files.map((f) => (f.id === id ? { ...f, isDirty: false } : f)),
+        activeFileId: state.activeFileId,
+        previewLanguage: state.previewLanguage,
+      };
+      persistStoreState(next);
+      return next;
+    }),
+
+  saveActiveFile: () => {
+    const { activeFileId, saveFile } = get();
+    if (activeFileId) saveFile(activeFileId);
+  },
 
   renameFile: (id, name) =>
-    set((state) => ({
-      files: state.files.map((f) => (f.id === id ? { ...f, name } : f)),
-    })),
+    set((state) => {
+      const next: PersistedThemeStore = {
+        files: state.files.map((f) => (f.id === id ? { ...f, name } : f)),
+        activeFileId: state.activeFileId,
+        previewLanguage: state.previewLanguage,
+      };
+      persistStoreState(next);
+      return next;
+    }),
 
-  setPreviewLanguage: (lang) => set({ previewLanguage: lang }),
+  setPreviewLanguage: (lang) =>
+    set((state) => {
+      const next: PersistedThemeStore = { ...state, previewLanguage: lang };
+      persistStoreState(next);
+      return next;
+    }),
 }));

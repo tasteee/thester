@@ -9,7 +9,7 @@ import { convertVSCodeThemeToMonaco, parseThemeJSON } from './utils/themeConvert
 import './App.css';
 
 export default function App() {
-  const { files, activeFileId, addFile } = useThemeStore();
+  const { files, activeFileId, addFile, saveActiveFile } = useThemeStore();
   const [showSearch, setShowSearch] = useState(false);
   const [splitPercent, setSplitPercent] = useState(50);
   const [monacoReady, setMonacoReady] = useState(false);
@@ -48,6 +48,19 @@ export default function App() {
       // silently ignore conversion errors — keep previous theme
     }
   }, [activeContent, monacoReady]);
+
+  // Intercept Ctrl/Cmd+S so it saves in-app rather than opening "Save page as…"
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (!(e.ctrlKey || e.metaKey)) return;
+      if (e.key.toLowerCase() !== 's') return;
+      e.preventDefault();
+      saveActiveFile();
+    };
+
+    window.addEventListener('keydown', onKeyDown, { capture: true });
+    return () => window.removeEventListener('keydown', onKeyDown, { capture: true });
+  }, [saveActiveFile]);
 
   // ── Split pane resize ────────────────────────────────────────────────────
   const handleDividerMouseDown = (e: React.MouseEvent) => {
