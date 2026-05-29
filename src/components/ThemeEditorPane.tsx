@@ -74,7 +74,6 @@ export function ThemeEditorPane({ onMonacoReady }: ThemeEditorPaneProps) {
             onChange={handleChange}
             loading={<MonacoLoader />}
             onMount={handleMount}
-            theme="vs-dark"
             options={{
               minimap: { enabled: false },
               fontSize: 13,

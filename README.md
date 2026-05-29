@@ -7,6 +7,7 @@ A gorgeous, premium-grade live testbed for crafting, previewing, and exporting V
 - **Multi-tab theme editing** — open multiple theme JSON files simultaneously; the focused tab drives the live preview
 - **Live Monaco preview** — the right pane updates instantly as you edit JSON; choose from 12 different programming languages
 - **Browse & import themes** — 25+ curated popular themes (Catppuccin, Dracula, One Dark Pro, Tokyo Night, Night Owl, GitHub, Nord, and more) with one-click import
+- **Import from extensions** — search Open VSX theme extensions and import their contributed theme JSON (best-effort; imports the first contributed theme)
 - **Upload your own theme** — drag and drop or file-select any `.json` theme file
 - **Start from scratch** — a polished blank template ready to edit
 - **Export as JSON** — download your finished theme with one click

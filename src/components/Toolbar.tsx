@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { FilePlus, Upload, Search, Download, Palette } from 'lucide-react';
+import { FilePlus, Upload, Search, Download, Palette, Save } from 'lucide-react';
 import { useThemeStore, DEFAULT_THEME_CONTENT } from '../store/useThemeStore';
 import styles from './Toolbar.module.css';
 
@@ -8,7 +8,7 @@ interface ToolbarProps {
 }
 
 export function Toolbar({ onSearch }: ToolbarProps) {
-  const { files, activeFileId, addFile } = useThemeStore();
+  const { files, activeFileId, addFile, saveActiveFile } = useThemeStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const activeFile = files.find((f) => f.id === activeFileId);
@@ -81,6 +81,23 @@ export function Toolbar({ onSearch }: ToolbarProps) {
         </button>
 
         <div className={styles.divider} />
+
+        <button
+          className={styles.btn}
+          onClick={saveActiveFile}
+          disabled={!activeFile || !activeFile.isDirty}
+          title={
+            !activeFile
+              ? 'No file to save'
+              : activeFile.isDirty
+                ? 'Save to browser storage (Ctrl+S)'
+                : 'All changes saved'
+          }
+          type="button"
+        >
+          <Save size={15} />
+          <span>Save</span>
+        </button>
 
         <button
           className={styles.btn}
