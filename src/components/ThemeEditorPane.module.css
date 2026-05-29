@@ -1,0 +1,54 @@
+.pane {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-editor);
+}
+
+.editorWrap {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 12px;
+  color: var(--text-muted);
+}
+
+.emptyState p {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-dim);
+}
+
+.emptyState span {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 280px;
+  line-height: 1.6;
+}
+
+.statusBar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: var(--bg-status-bar);
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.dirty {
+  color: var(--accent-bright);
+  margin-left: 6px;
+}
